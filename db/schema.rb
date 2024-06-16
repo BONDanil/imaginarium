@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_16_132242) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_16_132619) do
+  create_table "associations", force: :cascade do |t|
+    t.integer "player_id", null: false
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_associations_on_player_id"
+  end
+
   create_table "games", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "status", default: 0
@@ -51,6 +59,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_16_132242) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "associations", "players"
   add_foreign_key "games", "users"
   add_foreign_key "players", "games"
   add_foreign_key "players", "users"
