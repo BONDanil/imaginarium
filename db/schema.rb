@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_16_131925) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_16_132242) do
   create_table "games", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "status", default: 0
@@ -29,6 +29,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_16_131925) do
     t.index ["user_id"], name: "index_players_on_user_id"
   end
 
+  create_table "rounds", force: :cascade do |t|
+    t.integer "game_id", null: false
+    t.integer "host_id", null: false
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_rounds_on_game_id"
+    t.index ["host_id"], name: "index_rounds_on_host_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -44,4 +54,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_16_131925) do
   add_foreign_key "games", "users"
   add_foreign_key "players", "games"
   add_foreign_key "players", "users"
+  add_foreign_key "rounds", "games"
+  add_foreign_key "rounds", "players", column: "host_id"
 end
