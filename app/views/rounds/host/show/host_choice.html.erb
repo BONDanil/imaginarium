@@ -1,0 +1,7 @@
+Select one of the images, and add association description
+
+<%= form_with model: Association.new, url: round_associations_path(@round), method: :post do |f| %>
+  <%= f.hidden_field :player_id, value: current_player.id %>
+  <%= f.text_field :description %>
+  <%= f.submit "Next" %>
+<% end %>

@@ -1,0 +1,11 @@
+<% if @games.none? %>
+  <p>You do not have any games yet.</p>
+<% end %>
+
+<%= button_to games_path, method: :post do %>
+  New game
+<% end %>
+
+<% @games.each do |game| %>
+  <p><%= link_to game.created_at, game_path(game) %></p>
+<% end %>

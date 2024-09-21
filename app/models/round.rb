@@ -8,4 +8,7 @@ class Round < ApplicationRecord
     players_choice: 1,
     finished: 2
   }
+
+  scope :unfinished, -> { where.not(status: :finished) }
+  scope :ordered, -> { order(:created_at) }
 end

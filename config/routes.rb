@@ -8,4 +8,16 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "home#index"
+
+  resources :games do
+    put :start, on: :member
+    resources :rounds
+    resources :players do
+      get "games/:id", to: "players#create"
+    end
+  end
+
+  resources :rounds, only: [] do
+    resources :associations
+  end
 end
