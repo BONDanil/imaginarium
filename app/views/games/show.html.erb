@@ -1,0 +1,9 @@
+<%= turbo_frame_tag @game do %>
+  <% if @game.created? %>
+    <%= render "games/#{@current_user_role.to_s}/created" %>
+  <% elsif @game.in_progress? %>
+    <%= render "games/#{@current_user_role.to_s}/#{@game.current_round_status.to_s}" %>
+  <% else %>
+    <%= render "games/finished" %>
+  <% end %>
+<% end %>

@@ -11,4 +11,8 @@ class Round < ApplicationRecord
 
   scope :unfinished, -> { where.not(status: :finished) }
   scope :ordered, -> { order(:created_at) }
+
+  def sync_status!
+    finished! if game.players.count == associations.count
+  end
 end

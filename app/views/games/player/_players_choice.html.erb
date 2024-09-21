@@ -1,0 +1,5 @@
+<% if current_player.created_association_for_round?(@game.current_round) %>
+  <%= render "games/player/wait_others" %>
+<% else %>
+  <%= render "games/player/association_form" %>
+<% end %>
