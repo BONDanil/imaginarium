@@ -51,6 +51,8 @@ class Game < ApplicationRecord
   end
 
   def create_next_round!
+    return if rounds.unfinished.any?
+
     rounds.create(host: next_host)
   end
 end

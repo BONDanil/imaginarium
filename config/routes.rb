@@ -11,8 +11,8 @@ Rails.application.routes.draw do
 
   resources :games do
     put :start, on: :member
-    resources :rounds
-    resources :players do
+    resources :rounds, only: :create
+    resources :players, only: :create do
       get "games/:id", to: "players#create"
     end
   end

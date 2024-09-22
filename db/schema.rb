@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_19_193353) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_22_132342) do
   create_table "associations", force: :cascade do |t|
     t.integer "player_id", null: false
     t.string "description"
@@ -28,6 +28,29 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_19_193353) do
     t.datetime "updated_at", null: false
     t.string "host_ids_order", default: "[]"
     t.index ["user_id"], name: "index_games_on_user_id"
+  end
+
+  create_table "image_packs", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.integer "pack_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pack_id"], name: "index_images_on_pack_id"
+  end
+
+  create_table "player_images", force: :cascade do |t|
+    t.integer "player_id", null: false
+    t.integer "image_id", null: false
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["image_id"], name: "index_player_images_on_image_id"
+    t.index ["player_id"], name: "index_player_images_on_player_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -65,6 +88,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_19_193353) do
   add_foreign_key "associations", "players"
   add_foreign_key "associations", "rounds"
   add_foreign_key "games", "users"
+  add_foreign_key "images", "image_packs", column: "pack_id"
+  add_foreign_key "player_images", "images"
+  add_foreign_key "player_images", "players"
   add_foreign_key "players", "games"
   add_foreign_key "players", "users"
   add_foreign_key "rounds", "games"
