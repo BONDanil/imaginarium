@@ -30,10 +30,9 @@ class GamesController < BaseController
   def start
     # TODO: add logic of linking of images to each player
     game.update!(host_ids_order: game.players.ids.shuffle)
-
-    # TODO: DRY with rounds#create
-    round = game.rounds.create(host: game.current_host)
-    redirect_to game_round_path(game, round)
+    game.in_progress!
+    game.create_next_round!
+    redirect_to game_path(game)
   end
 
   private

@@ -1,8 +1,7 @@
 class PlayersController < BaseController
-  before_action :validate_current_player
-
   def create
-    game.players.create(user: current_user)
+    game.players.create(user: current_user) if game.player_by_user(current_user).blank?
+    redirect_to game_path(game)
   end
 
   private

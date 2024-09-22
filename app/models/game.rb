@@ -20,7 +20,13 @@ class Game < ApplicationRecord
   end
 
   def current_host
+    return default_host if created?
+
     current_round.host
+  end
+
+  def default_host
+    @default_host ||= players.find_by(user: self.user)
   end
 
   def shuffled_players
@@ -48,6 +54,10 @@ class Game < ApplicationRecord
 
   def current_round
     rounds.last
+  end
+
+  def player_by_user(user)
+    players.find_by(user:)
   end
 
   def create_next_round!

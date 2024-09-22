@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     put :start, on: :member
     resources :rounds, only: :create
     resources :players, only: :create do
-      get "games/:id", to: "players#create"
+      get "/join", to: "players#create", on: :collection
     end
   end
 
