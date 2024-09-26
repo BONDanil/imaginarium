@@ -1,5 +1,6 @@
 class AssociationsController < ApplicationController
   def create
+    # TODO: think about host/player association creation
     round.associations.create(association_params)
     round.players_choice!
 

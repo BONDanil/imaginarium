@@ -1,0 +1,7 @@
+<%# locals: (images:) %>
+
+<div class="flex">
+  <% images.each do |image| %>
+    <%= render "shared/images/image", image: %>
+  <% end %>
+</div>

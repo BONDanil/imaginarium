@@ -13,3 +13,13 @@
  *= require_tree .
  *= require_self
  */
+
+.image-sm {
+  max-height: 200px;
+}
+
+.flex {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}

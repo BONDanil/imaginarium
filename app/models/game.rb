@@ -33,7 +33,7 @@ class Game < ApplicationRecord
     @shuffled_players ||= players.shuffle
   end
 
-  def distribute_images
+  def distribute_images!
     available_images = image_pack.images
     images_count_per_player = available_images.count / players.count
     game_images = available_images.sample(images_count_per_player * players.count)
