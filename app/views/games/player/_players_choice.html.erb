@@ -1,5 +1,8 @@
+<!--TODO: change @game to locals from "games/show"-->
+
 <% if current_player.created_association_for_round?(@game.current_round) %>
   <%= render "games/player/wait_others" %>
 <% else %>
-  <%= render "games/player/association_form" %>
+  Host's association: <%= @game.current_round.host_association.description %>
+  <%= render "associations/form", images: current_player.images_on_hand %>
 <% end %>

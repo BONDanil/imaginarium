@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :rounds, only: [] do
+  resources :rounds do
     resources :associations
   end
 end

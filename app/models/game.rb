@@ -65,4 +65,8 @@ class Game < ApplicationRecord
 
     rounds.create(host: next_host)
   end
+
+  def sync_status!
+    finished! if rounds.count == players.count
+  end
 end

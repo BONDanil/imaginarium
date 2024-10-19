@@ -3,13 +3,18 @@ class Association < ApplicationRecord
 
   belongs_to :player
   belongs_to :round
-  has_one :image
+  belongs_to :image
 
   after_create :sync_round_status!
+  after_create :sync_image_status!
 
   private
 
   def sync_round_status!
     round.sync_status!
+  end
+
+  def sync_image_status!
+    player.player_images.find_by(image:).played!
   end
 end

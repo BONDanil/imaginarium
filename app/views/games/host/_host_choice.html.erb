@@ -1,3 +1,5 @@
 Choose image and create association
 
-<%= render "shared/images/list", images: current_player.images %>
+<%#= render "shared/images/list", images: current_player.images %>
+
+<%= render "associations/form", images: current_player.images_on_hand, host: true %>

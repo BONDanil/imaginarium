@@ -17,4 +17,8 @@ class Player < ApplicationRecord
   def created_association_for_round?(round)
     round.associations.where(player: self).any?
   end
+
+  def images_on_hand
+    images.joins(:player_images).where(player_images: { status: 'on_hand' }).distinct
+  end
 end
