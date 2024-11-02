@@ -3,7 +3,7 @@ class Player < ApplicationRecord
 
   belongs_to :user
   belongs_to :game
-  has_many :player_images
+  has_many :player_images, dependent: :destroy
   has_many :images, through: :player_images
 
   def actualize_images

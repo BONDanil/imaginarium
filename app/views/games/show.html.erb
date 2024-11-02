@@ -1,9 +1,5 @@
-<%= turbo_frame_tag @game do %>
-  <% if @game.created? %>
-    <%= render "games/#{@current_user_role.to_s}/created" %>
-  <% elsif @game.in_progress? %>
-    <%= render "games/#{@current_user_role.to_s}/#{@game.current_round_status.to_s}" %>
-  <% else %>
-    <%= render "games/finished" %>
-  <% end %>
+<%= turbo_stream_from [@game, current_user] %>
+
+<%= turbo_frame_tag "game_player_#{current_player.id}" do %>
+  <%= render "games/actual_state", game: @game, current_player:, current_player_role: @game.player_role(current_player) %>
 <% end %>

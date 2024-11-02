@@ -1,0 +1,9 @@
+<%# locals: (game:, current_player:, current_player_role: game.player_role(current_player)) %>
+
+<% if game.created? %>
+  <%= render "games/#{current_player_role.to_s}/created" %>
+<% elsif game.in_progress? %>
+  <%= render "games/#{current_player_role.to_s}/#{game.current_round_status.to_s}", game:, current_player: %>
+<% else %>
+  <%= render "games/finished", game: %>
+<% end %>

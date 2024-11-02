@@ -3,9 +3,7 @@ class AssociationsController < ApplicationController
 
   def create
     round.associations.create(association_params)
-
-    # TODO: update all players screen
-    redirect_to game_path(game)
+    update_game_view(game)
   end
 
   private

@@ -1,4 +1,4 @@
 class ImagePack < ApplicationRecord
-  has_many :images, foreign_key: "pack_id"
-  has_many :games
+  has_many :images, foreign_key: "pack_id", dependent: :destroy
+  has_many :games, dependent: :nullify
 end

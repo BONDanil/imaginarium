@@ -1,3 +1,5 @@
+<%# locals: (game:, current_player:) %>
+
 table with round results
 
-<%= button_to "Next round", game_rounds_path(@game), method: :post %>
+<%= button_to "Next round", game_rounds_path(game), method: :post %>

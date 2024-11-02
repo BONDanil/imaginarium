@@ -46,10 +46,14 @@ class Game < ApplicationRecord
     players.pluck(:user_id).include?(user.id) || self.user == user
   end
 
-  def user_role(user)
-    return unless valid_user?(user)
+  def valid_player?(player)
+    player_ids.include?(player.id)
+  end
 
-    current_host.user == user ? :host : :player
+  def player_role(player)
+    return unless valid_player?(player)
+
+    current_host == player ? :host : :player
   end
 
   def current_round
