@@ -1,12 +1,15 @@
 class Association < ApplicationRecord
-  # TODO: validate presence of description, if its host's association
+  # TODO: add column host:boolean, and use of_host? method
 
   belongs_to :player
   belongs_to :round
   belongs_to :image
+  has_many :votes, dependent: :destroy
 
   after_create :sync_round_status!
   after_create :sync_image_status!
+
+  scope :by_player, ->(player) { where(player:) }
 
   private
 

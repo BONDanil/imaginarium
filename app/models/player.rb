@@ -5,6 +5,7 @@ class Player < ApplicationRecord
   belongs_to :game
   has_many :player_images, dependent: :destroy
   has_many :images, through: :player_images
+  has_many :votes, dependent: :destroy
 
   def actualize_images
     if images.off_hand.any? && images.on_hand.count < IMAGES_ON_HAND_COUNT
@@ -16,6 +17,10 @@ class Player < ApplicationRecord
 
   def created_association_for_round?(round)
     round.associations.where(player: self).any?
+  end
+
+  def voted_in_round?(round)
+    round.votes.where(player: self).any?
   end
 
   def images_on_hand

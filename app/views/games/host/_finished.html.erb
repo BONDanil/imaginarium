@@ -2,4 +2,6 @@
 
 table with round results
 
+<%= render "shared/finished/table", players: game.players %>
+
 <%= button_to "Next round", game_rounds_path(game), method: :post %>

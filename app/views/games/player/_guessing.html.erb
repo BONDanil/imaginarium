@@ -1,0 +1,10 @@
+<%# locals: (game:, current_player:) %>
+
+<!--TODO: avoid self voting-->
+
+<% if current_player.voted_in_round?(game.current_round) %>
+  wait for others
+<% else %>
+  Try to guess what card is host's
+  <%= render "votes/form", game:, associations: game.current_round.associations %>
+<% end %>

@@ -1,0 +1,17 @@
+<%# locals: (game:, associations:) %>
+
+<%= form_with(model: [game, Vote.new], local: true, data: { controller: "image-selector" }) do |f| %>
+  <div class="flex">
+    <% associations.each do |association| %>
+      <div class="image-selection" data-action="click->image-selector#selectImage" data-image-selector-target="image" data-image-id="<%= association.id %>">
+        <%= render "shared/images/image", image: association.image %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= f.hidden_field :association_id, data: { image_selector_target: "input" } %>
+
+  <div class="form-group mt-4">
+    <%= f.submit "Choose", class: "btn btn-primary", data: { image_selector_target: "submitBtn" } %>
+  </div>
+<% end %>

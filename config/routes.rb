@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :games do
     put :start, on: :member
     resources :rounds, only: :create
+    resources :votes, only: :create
     resources :players, only: :create do
       get "/join", to: "players#create", on: :collection
     end
