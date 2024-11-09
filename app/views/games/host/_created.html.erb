@@ -1,3 +1,7 @@
+<%# locals: (game:) %>
+
 Wait other players and start game
+
+<%= render "shared/players/list", players: game.players %>
 
 <%= button_to "Start", start_game_path, method: :put %>

@@ -7,6 +7,8 @@ class Player < ApplicationRecord
   has_many :images, through: :player_images
   has_many :votes, dependent: :destroy
 
+  delegate :nickname, to: :user, prefix: false
+
   def actualize_images
     if images.off_hand.any? && images.on_hand.count < IMAGES_ON_HAND_COUNT
       images.off_hand

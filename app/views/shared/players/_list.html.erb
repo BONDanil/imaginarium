@@ -1,0 +1,14 @@
+<%# locals: (players:) %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Player name</th>
+    </tr>
+  </thead>
+  <tbody id="players_list" is="turbo-frame">
+    <% players.each do |player| %>
+      <%= render "shared/players/list_item", player: %>
+    <% end %>
+  </tbody>
+</table>
