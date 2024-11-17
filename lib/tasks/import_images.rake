@@ -17,7 +17,7 @@ namespace :images do
       image = Image.new(pack: image_pack)
 
       # Attach the PNG file to the Image record
-      image.img.attach(io: File.open(file_path), filename: File.basename(file_path))
+      image.file.attach(io: File.open(file_path), filename: File.basename(file_path))
 
       # Save the image record
       if image.save
