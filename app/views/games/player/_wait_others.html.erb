@@ -1,1 +1,8 @@
-table of users, who already chose association
+<%# locals: (game:, stage:) %>
+
+<% if stage == :associations %>
+  <%= render "shared/players/with_association", players: game.players_without_host %>
+<% else %>
+  <%= render "shared/players/with_votes", players: game.players_without_host %>
+<% end %>
+

@@ -13,6 +13,8 @@ class Game < ApplicationRecord
   }
 
   delegate :status, to: :current_round, prefix: true
+  delegate :players_with_associations, to: :current_round, prefix: false
+  delegate :players_with_votes, to: :current_round, prefix: false
 
   def next_host
     player_id = host_ids_order[(rounds.count) % host_ids_order.count]
@@ -72,5 +74,9 @@ class Game < ApplicationRecord
 
   def sync_status!
     finished! if rounds.count == players.count
+  end
+
+  def players_without_host
+    players.excluding(current_host)
   end
 end

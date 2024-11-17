@@ -3,7 +3,7 @@
 <!--TODO: avoid self voting-->
 
 <% if current_player.voted_in_round?(game.current_round) %>
-  wait for others
+  <%= render "games/player/wait_others", game:, stage: :votes %>
 <% else %>
   Try to guess what card is host's
   <%= render "votes/form", game:, associations: game.current_round.associations %>

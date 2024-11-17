@@ -2,7 +2,9 @@ class Round < ApplicationRecord
   belongs_to :game
   belongs_to :host, class_name: "Player"
   has_many :associations, dependent: :destroy
+  has_many :players_with_associations, through: :associations, source: :player
   has_many :votes, through: :associations
+  has_many :players_with_votes, through: :votes, source: :player
 
   after_update :sync_game_status!, if: :finished?
 

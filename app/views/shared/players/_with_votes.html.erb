@@ -1,0 +1,26 @@
+<%# locals: (players:) %>
+
+<table>
+  <thead>
+  <tr>
+    <th>Player name</th>
+    <th>Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% players.each do |player| %>
+    <tr>
+      <th>
+        <%= player.nickname %>
+      </th>
+      <th>
+        <% if player.game.players_with_votes.include?(player) %>
+          Done
+        <% else %>
+          Voting
+        <% end %>
+      </th>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

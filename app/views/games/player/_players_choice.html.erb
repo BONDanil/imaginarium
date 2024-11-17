@@ -1,7 +1,7 @@
 <%# locals: (game:, current_player:) %>
 
 <% if current_player.created_association_for_round?(game.current_round) %>
-  <%= render "games/player/wait_others" %>
+  <%= render "games/player/wait_others", game:, stage: :associations %>
 <% else %>
   Host's association: <%= game.current_round.host_association.description %>
   <%= render "associations/form", game:, images: current_player.images_on_hand %>
