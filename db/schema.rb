@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2024_11_09_192636) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -40,24 +43,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_09_192636) do
   end
 
   create_table "associations", force: :cascade do |t|
-    t.integer "player_id", null: false
+    t.bigint "player_id", null: false
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "round_id"
-    t.integer "image_id"
+    t.bigint "round_id"
+    t.bigint "image_id"
     t.index ["image_id"], name: "index_associations_on_image_id"
     t.index ["player_id"], name: "index_associations_on_player_id"
     t.index ["round_id"], name: "index_associations_on_round_id"
   end
 
   create_table "games", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "host_ids_order", default: "[]"
-    t.integer "image_pack_id"
+    t.bigint "image_pack_id"
     t.index ["image_pack_id"], name: "index_games_on_image_pack_id"
     t.index ["user_id"], name: "index_games_on_user_id"
   end
@@ -69,15 +72,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_09_192636) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.integer "pack_id", null: false
+    t.bigint "pack_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["pack_id"], name: "index_images_on_pack_id"
   end
 
   create_table "player_images", force: :cascade do |t|
-    t.integer "player_id", null: false
-    t.integer "image_id", null: false
+    t.bigint "player_id", null: false
+    t.bigint "image_id", null: false
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -86,8 +89,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_09_192636) do
   end
 
   create_table "players", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "game_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "game_id", null: false
     t.integer "points", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -96,8 +99,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_09_192636) do
   end
 
   create_table "rounds", force: :cascade do |t|
-    t.integer "game_id", null: false
-    t.integer "host_id", null: false
+    t.bigint "game_id", null: false
+    t.bigint "host_id", null: false
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -119,8 +122,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_09_192636) do
   end
 
   create_table "votes", force: :cascade do |t|
-    t.integer "player_id", null: false
-    t.integer "association_id", null: false
+    t.bigint "player_id", null: false
+    t.bigint "association_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["association_id"], name: "index_votes_on_association_id"
