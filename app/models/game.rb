@@ -45,7 +45,7 @@ class Game < ApplicationRecord
   end
 
   def valid_user?(user)
-    players.pluck(:user_id).include?(user.id) || self.user == user
+    players.pluck(:user_id).include?(user.id)
   end
 
   def valid_player?(player)
