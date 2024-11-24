@@ -1,30 +1,29 @@
+require "populate/image_packs"
+
 namespace :images do
-  desc "Import PNG files from app/assets/images and attach them to Image records"
+  desc "Import image packs from S3 and create ImagePack and Image records"
   task import: :environment do
-    # Define the directory where the PNG files are located
-    images_directory = Rails.root.join('app', 'assets', 'images')
+    include Populate::ImagePacks
 
-    # Ensure the ImagePack exists (you mentioned attaching to ImagePack.first)
-    image_pack = ImagePack.first
-    if image_pack.nil?
-      puts "No ImagePack found. Please create an ImagePack first."
-      exit
-    end
+    s3_client.list_objects_v2(bucket: BUCKET_NAME, delimiter: '/').common_prefixes.each do |prefix|
+      pack_name = prefix[:prefix].chomp('/')
+      image_pack = ImagePack.find_or_create_by!(name: pack_name)
 
-    # Iterate over each PNG file in the directory
-    Dir.glob("#{images_directory}/**/*.png").each do |file_path|
-      # Create a new Image record
-      image = Image.new(pack: image_pack)
+      s3_client.list_objects_v2(bucket: BUCKET_NAME, prefix: prefix[:prefix]).contents.each do |file|
+        next if file.key.end_with?('/')
 
-      # Attach the PNG file to the Image record
-      image.img.attach(io: File.open(file_path), filename: File.basename(file_path))
+        filename = File.basename(file.key)
+        next if image_present?(image_pack.id, filename)
 
-      # Save the image record
-      if image.save
-        puts "Successfully created Image for #{File.basename(file_path)}"
-      else
-        puts "Failed to create Image for #{File.basename(file_path)}"
-        puts image.errors.full_messages
+        image = Image.new(pack: image_pack)
+        s3_file = s3_client.get_object(bucket: BUCKET_NAME, key: file.key)
+        image.file.attach(io: StringIO.new(s3_file.body.read), filename:)
+
+        if image.save
+          puts "."
+        else
+          puts "Failed to create Image for #{file.key}: #{image.errors.full_messages}"
+        end
       end
     end
 
