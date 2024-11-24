@@ -4,4 +4,14 @@ Wait other players and start game
 
 <%= render "shared/players/list", players: game.players %>
 
+<div data-controller="clipboard" data-clipboard-success-content-value="Copied!">
+  <input type="text" value="<%= join_game_players_url(game.id) %>" data-clipboard-target="source" />
+
+  <button type="button" data-action="clipboard#copy" data-clipboard-target="button">Copy to clipboard</button>
+</div>
+
+<div>
+  <%= qr_code_svg(join_game_players_url(game.id)) %>
+</div>
+
 <%= button_to "Start", start_game_path, method: :put %>
