@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/turbo-rails": "^8.0.12",
+    "@rails/ujs": "^7.1.3-4",
+    "@stimulus-components/clipboard": "^5.0.0",
+    "controllers": "^0.0.2"
+  },
+  "scripts": {
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",
+    "watch": "esbuild app/javascript/*.* --bundle --sourcemap --watch --outdir=app/assets/builds",
+    "watch:css": "postcss app/assets/stylesheets/application.css --watch --output app/assets/builds/application.css"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
+  "devDependencies": {
+    "esbuild": "^0.24.0",
+    "postcss": "^8.4.49",
+    "postcss-cli": "^11.0.0"
+  }
+}
