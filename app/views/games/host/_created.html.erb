@@ -10,4 +10,8 @@ Wait other players and start game
   <button type="button" data-action="clipboard#copy" data-clipboard-target="button">Copy to clipboard</button>
 </div>
 
+<div>
+  <%= qr_code_svg(join_game_players_url(game.id)) %>
+</div>
+
 <%= button_to "Start", start_game_path, method: :put %>
