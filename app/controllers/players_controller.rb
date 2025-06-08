@@ -3,6 +3,7 @@ class PlayersController < BaseController
     if game.player_by_user(current_user).blank?
       new_player = game.players.create(user: current_user)
 
+      # TODO: reuse some code with application_controller#update_game_view
       game.players.except(new_player).each do |player|
         Turbo::StreamsChannel.broadcast_append_later_to(
           [game, player.user],

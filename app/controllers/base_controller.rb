@@ -1,3 +1,4 @@
+# TODO: move to concern
 class BaseController < ApplicationController
   before_action :authenticate_user!
 
