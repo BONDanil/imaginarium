@@ -26,6 +26,6 @@ class Player < ApplicationRecord
   end
 
   def images_on_hand
-    images.joins(:player_images).where(player_images: { status: 'on_hand' }).distinct
+    images.joins(:player_images).where(player_images: { status: PlayerImage.statuses[:on_hand] }).distinct
   end
 end
